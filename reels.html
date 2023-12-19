@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Instagram Reels</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .download-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #1877f2;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #1565c0;
+        }
+    </style>
+</head>
+<body>
+    <div class="download-section">
+        <h2>Download Instagram Reels</h2>
+        <form id="download-form">
+            <input type="text" id="reel-url" placeholder="Enter the reel URL here" required>
+            <button type="submit">Download</button>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('download-form');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const reelUrl = document.getElementById('reel-url').value;
+
+            // Extract the Reel ID from the URL
+            const reelId = reelUrl.split('/').pop();
+
+            // Get the direct video URL using the Reel ID
+            const response = await fetch(`https://api.example.com/get-video-url?reelId=${reelId}`);
+            const { videoUrl } = await response.json();
+
+            // Store the video URL for later use
+            sessionStorage.setItem('videoUrl', videoUrl);
+
+            // Redirect the user to an ad page
+            window.location.href = 'ads.html';
+        });
+    </script>
+</body>
+</html>
